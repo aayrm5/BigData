@@ -28,5 +28,25 @@ Google came up with `Big Table` - A distributed storage system for structured da
 - Distributed: Stores data on HDFS.
 - Scalable: Capacity directly proportional to number of nodes in the cluster.
 - Fault Tolerant: Piggybacks on Hadoop.
+- Structured: A Columnar Store, a loose data structure
+- Low Latency: Real-time access using row based indices called row keys.
+- Random Access: Row keys allow access updates to one record.
+- ACID Complaince: Some transactions will have ACID transactions.
+
+HBase can offer 2 things:
+1. provides you quick searching based on row keys.
+2. provides processing which is also provided by Map Reduce.
+
+### HBase vs Relational Databases
+
+The layout of traditional database is that it stores the data row-wise. Where as HBase is a columnar oriented database, that means it stores the data column-wise. <br>
+
+Advantages of a columnar store:
+1. Sparse Tables: Traditional databases create Sparse tables over a period of time, as there might be null values in multiple columns. In columnar storage, the column is eliminated where there is no value associated with it.
+2. Denormalization: Data has to be stored in one big table rather than dividing the tables into multiple chunks (normalization)
+3. Only CRUD operations could be performed, cannot perform Joins, GroupBy, OrderBy. This is why data needs to be self contained in one row.
+4. ACID Compliance - HBase provides ACID compliance at row level. Whenever we are trying to update multiple columns for a single row, then either all of them are updated or none of them are updated. *Updates to multiple rows are not Atomic*
+
+
 
 
