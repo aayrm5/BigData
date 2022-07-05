@@ -42,7 +42,7 @@ HBase can offer 2 things:
 The layout of traditional database is that it stores the data row-wise. Where as HBase is a columnar oriented database, that means it stores the data column-wise. <br>
 
 Advantages of a columnar store:
-1. Sparse Tables: Traditional databases create Sparse tables over a period of time, as there might be null values in multiple columns. In columnar storage, the column is eliminated where there is no value associated with it.
+1. Sparse Tables: Traditional databases create Dense tables over a period of time, as there might be null values in multiple columns. In columnar storage, the column/key is eliminated where there is no value associated with it. These are called Sparse tables which are compact and very efficient.
 2. Denormalization: Data has to be stored in one big table rather than dividing the tables into multiple chunks (normalization)
 3. Only CRUD operations could be performed, cannot perform Joins, GroupBy, OrderBy. This is why data needs to be self contained in one row.
 4. ACID Compliance - HBase provides ACID compliance at row level. Whenever we are trying to update multiple columns for a single row, then either all of them are updated or none of them are updated. *Updates to multiple rows are not Atomic*
