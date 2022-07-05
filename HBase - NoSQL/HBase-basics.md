@@ -47,6 +47,20 @@ Advantages of a columnar store:
 3. Only CRUD operations could be performed, cannot perform Joins, GroupBy, OrderBy. This is why data needs to be self contained in one row.
 4. ACID Compliance - HBase provides ACID compliance at row level. Whenever we are trying to update multiple columns for a single row, then either all of them are updated or none of them are updated. *Updates to multiple rows are not Atomic*
 
+### How data is laid out in HBase:
+
+HBase has 4-dimensional Data Model
+1. Row Key
+2. Column Family
+3. Column
+4. Timestamp
+
+`Row Key` - A unique identifier for each record. Internally represented as a byte array. Sorted in Ascending order. <br>
+`Columns` are logically grouped into `Column Families`. Later you can name this column family. E.g: columns dept, grade & title are grouped together under work column family. Each Column Family is stored in a separate data file. <br>
+`Timestamp` shows the versioning of a record and fetches an updated record whenever it is queried with latest timestamp.
+
+
+
 
 
 
