@@ -9,6 +9,8 @@
 7. Zookeeper
 8. HMaster
 
+![HBase Architecture](./Images/HBase_Architecture.png)
+
 Let's say we have a table `employee`, which contains 2 column families and each column family contains 3 columns each. The row-key of this table `employee` is `employee id`.
 There are 10,000 records in the `employee` table.
 
