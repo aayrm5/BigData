@@ -29,6 +29,4 @@ i.e. if we have 4 data-nodes, we will have 4 region-servers, each running on one
 
 Note: Column families will also be stored in separate files. <br>
 
-<img src="HBase - NoSQL\HBase Table.png"
-    alt = "HBase Table storage"
-    style ="float: left; margin-right:10px;"/>
+![](HBase%20Table.png)
