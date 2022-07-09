@@ -59,7 +59,7 @@ HBase has 4-dimensional Data Model
 `Columns` are logically grouped into `Column Families`. Later you can name this column family. E.g: columns dept, grade & title are grouped together under work column family. Each Column Family is stored in a separate data file. <br>
 `Timestamp` shows the versioning of a record and fetches an updated record whenever it is queried with latest timestamp.
 
-
+![](./Images/HBase_Dimensions.png)
 
 
 
