@@ -29,7 +29,7 @@ i.e. if we have 4 data-nodes, we will have 4 region-servers, each running on one
 
 Note: Column families will also be stored in separate files. <br>
 
-![](HBase%20Table.png)
+![](./Images/HBase%20Table.png)
 
 **`MemStore`** - Whenever we want to write new records, these records will be stored in Memstore. When the size of the memstore grows to a threshold size then the content of the memstore will be flushed to the disk and a new file will be created. This file which is created from the memstore flush is called a `HFile`. *For each region, there is a memstore for every column family.*<br>
 
