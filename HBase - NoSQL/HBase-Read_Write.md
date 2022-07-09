@@ -56,3 +56,19 @@ Major compaction is resource intensive because it merges alot of HFiles. Major c
 ![HBase Compations](./Images/HBase_Compactions.png)
 
 
+## HBase Update & Delete Operations:
+
+HBase uses HDFS internally, but HDFS is a read-only file system and changes cannot be made to it.
+
+Thus HBase uses timestamps to update the info. HBase creates multiple timestamps and reads the latest one, so whenever user queries the data, latest info is provided which resembles an update.
+
+#### HBase Data Deleltion:
+Delete is a special type of update in HBase, where the values for which the delete request is submitted are not deleted immediately. Rather, these values are masked by assigning a tombstone marker to them. Every request to read these values (with  tombstone markers) returns nulls to the client, which gives the client an impression that the values are already deleted.
+
+The reason why HBase does this is because HFiles are immutable. Recall that HDFS doesn't allow modifying the data of a file. All the values with tombstone markers are permanently removed during the next major compaction.
+
+
+## Incase of Server Failure:
+1. If the actuive HMaster fails, the Zookeeper gives the Master's responsibility to one of the inactive HMasters in the cluster.
+2. If a region server fails, Zookeeper notifies the HMaster about it. HMaster reassigns the regions of the failed region server to some other region server.
+
