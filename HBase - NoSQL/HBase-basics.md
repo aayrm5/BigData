@@ -57,6 +57,9 @@ HBase has 4-dimensional Data Model
 
 `Row Key` - A unique identifier for each record. Internally represented as a byte array. Sorted in Ascending order. <br>
 `Columns` are logically grouped into `Column Families`. Later you can name this column family. E.g: columns dept, grade & title are grouped together under work column family. Each Column Family is stored in a separate data file. <br>
+
+![Column Family - HBase](./Images/HBase_ColumnFamily.png)
+
 `Timestamp` shows the versioning of a record and fetches an updated record whenever it is queried with latest timestamp.
 
 ![](./Images/HBase_Dimensions.png)
