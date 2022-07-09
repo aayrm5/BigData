@@ -12,7 +12,7 @@
 
 ![Read & Write Operation in HBase](./Images/HBase_Read_Write.png)
 
-### HBase Write Operation
+## HBase Write Operation
 
 **Step1**: The data first needs to be written to the WAL, which is a write-ahead Log. WAL stores the new or updated data that has not been written to the HDFS and can be used for recovery, incase of a region failure.
 
@@ -22,15 +22,37 @@
 
 ![HBase Write Operation](./Images/HBase_Write.png)
 
-### HBase Read Operation:
+## HBase Read Operation:
 
 **Step1**: The region server first checks the block cache of the region server that stores the recently accessed data.
 
-Step2: In case the data is not available in the block cache, it checks for the required data in the in-memory store i.e. MemStore
+**Step2**: In case the data is not available in the block cache, it checks for the required data in the in-memory store i.e. MemStore
 
-Step3: If the MemStore doesn’t contain that particular key-value, the HFile containing that particular key-value pair is identified.
+**Step3**: If the MemStore doesn’t contain that particular key-value, the HFile containing that particular key-value pair is identified.
 
 Once the HFile is identified, instead of reading the entire HFile (~GB size), the Data Block Index of the HFile is scanned to get the Data Block with the Key-Value pair, A binary search in this data block finally returns the key-value pair (or null in case it doesn’t exist).
 
 ![HBase Read Operation](./Images/HBase_Read.png)
+
+## Compactions:
+
+Need for compaction: The flushes from MemStore to the HDFS create Multiple HFiles, especially during periods of heavy incoming writes. 
+
+**This will lead to two major problems:**
+
+    1. The read efficiency gets low. This is because a large number of HFiles increases the number of disk seeks needed for a read process, thereby adversely impacting the read performance.
+
+    2. It leads to dirty data. A large number of HFiles might result in a lot of redundancy and inconsistency in data.
+
+Compaction comes to our rescue against these challenges. It refers to a process of combining small HFiles to large HFiles, containing merged, sorted, and most recent information.
+
+**Compactions are of two types - Minor and Major**
+
+In minor compaction HBase picks only some of the smaller HFiles and rewrites them to a few larger HFiles.
+On the other hand, in Major compaction, all HFiles of a store are picked and rewritten into a single large HFile.
+
+Major compaction is resource intensive because it merges alot of HFiles. Major compaction is done when there is less traffic on the system during non-working hours.
+
+![HBase Compations](./Images/HBase_Compactions.png)
+
 
