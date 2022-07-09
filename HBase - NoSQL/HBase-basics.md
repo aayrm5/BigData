@@ -8,15 +8,16 @@
 
 **`A`** - Atomicity => A financial transaction occuring should deduct from the sender and credit the receiver. Either both of these should happen or none of these should heppen. <br>
 **`C`** - Consistency => The constraints should be met, none of the constraints should be violated. e.g: primary key should be unique. <br>
-**`I`** - Isolation => If two persons are operating on a row, making operations on that row, the operation should happen in some defined order/sequence. There should be no dead locks. <br>
-**`D`** - Durability => In case of power loss, crashes or errors, the data is not lost.
+**`I`** - Isolation => Concurrent operations on the database should appear as though they were applied in some sequence. If two persons are operating on a row, making operations on that row, the operation should happen in some defined order/sequence. There should be no dead locks. <br>
+**`D`** - Durability => In case of power loss, crashes or errors, the data is not lost. Safety of the data is paramount.
 
-**Unfortunately, Hadoop is not a database** <br>
+**Unfortunately, Hadoop is not a database: Limitations of Hadoop** <br>
 The following are the characteristics of Hadoop, which are completely opposite to a traditional database:
-- Contains Unstructured Data
-- No random access to the records
-- Queries are high in latency
-- Non ACID Complaint
+1. Unstructured data - Instead of rows & columns, data is stored in the form of files.
+2. No random access: HDFS doesn’t have indexing to pull the data randomly, any predicate has to go through the entire block of data to give the results out.
+3. High Latency - It takes too much time to retrieve data from HDFS.
+4. Not ACID compliant - There is a risk of inconsistency in the data if it’s not ACID.
+
 
 But we want all the issues to be resolved and want all the benefits of a database in Hadoop.
 
@@ -41,9 +42,9 @@ HBase can offer 2 things:
 
 The layout of traditional database is that it stores the data row-wise. Where as HBase is a columnar oriented database, that means it stores the data column-wise. <br>
 
-Advantages of a columnar store:
-1. Sparse Tables: Traditional databases create Dense tables over a period of time, as there might be null values in multiple columns. In columnar storage, the column/key is eliminated where there is no value associated with it. These are called Sparse tables which are compact and very efficient.
-2. Denormalization: Data has to be stored in one big table rather than dividing the tables into multiple chunks (normalization)
+### Advantages of a columnar store:
+1. Sparse Tables: Traditional databases create Dense tables over a period of time, as there might be null values in multiple columns. In columnar storage, the column/key is eliminated where there is no value associated with it. These are called Sparse tables which are compact and very efficient. No wastage of space when storing sparse data
+2. Denormalization: Data has to be stored in one big table rather than dividing the tables into multiple chunks (normalization). This will minimize the disk seek while querying.
 3. Only CRUD operations could be performed, cannot perform Joins, GroupBy, OrderBy. This is why data needs to be self contained in one row.
 4. ACID Compliance - HBase provides ACID compliance at row level. Whenever we are trying to update multiple columns for a single row, then either all of them are updated or none of them are updated. *Updates to multiple rows are not Atomic*
 
