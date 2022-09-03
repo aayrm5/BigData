@@ -223,5 +223,17 @@ A set holds only unique values. It cannot hold duplicates.
 ```scala
 val set1 = Set(1,1,1,1,3,3,3,3,4,4,4,45,5,5,5,2)
 println(set1)       //>Set(5, 1, 2, 45, 3, 4)
-(set1.min, set1.max, set1.sum)
+(set1.min, set1.max, set1.sum)      //(Int, Int, Int) = (1,45,60)
+```
+
+- Map
+
+A collection of key-value pairs like dictionary. <br>
+Keys cannot be repeated, latest key-value is displayed, first one is discarded. <br>
+
+```scala
+val map1 = Map(1 -> "Sumit", 2 -> "Riyaz", 3 -> "Sushant")
+// scala.collection.immutable.Map[Int,String] = Map(1 -> Sumit, 2 -> Riyaz, 3 -> Sushant)
+
+map1.get(1)     //Option[String] = Some(Sumit)
 ```
