@@ -30,6 +30,7 @@ By removing this print statement, the function becomes pure func.
 def func2(a:Int) = {return a} //pure function.
 ```
 # Referencial Transparency: A way to test the purity of the function
+
 A func is referentially transparent, if replacing the function with a value do not impact the result.
 
 sqrt(4) = 2. So where ever we have sqrt function we replace it by 2 and the value of the resultant func doesn't change. That's referential transparency.
@@ -62,6 +63,7 @@ func(4) //16
 ```
 
 # Higher order functions
+
 A function which either takes a function as an input parameter or returns another function as its output.
 
 - Map:
@@ -75,6 +77,7 @@ a.map(doubler)  //  scala.collection.immutable.IndexedSeq[Int] = Vector(2, 4, 6,
 ```
 
 # Anonymous Function
+
 A function with out a name.
 
 ```scala
@@ -90,6 +93,7 @@ a.map(x => x * 2)  // scala.collection.immutable.IndexedSeq[Int] = Vector(2, 4, 
 ```
 
 # Immutability
+
 we cannot change the value of the variables. 
 
 var - variable that can be mutated.
@@ -98,6 +102,7 @@ val - variable that can not be mutated.
 val is preferred as it is immutable and doesn't have any side effects.
 
 # Loops vs Recursion vs Tailed Recursion
+
 Code to write a factorial of a function
 
 ```scala
@@ -124,6 +129,7 @@ def factorialTailRec(input:Int, result:Int): Int = {
 ```
 
 # Statement vs Expression
+
 - Each line in a code block is a statement
 - Expression is a line of code that returns something
 
@@ -136,3 +142,83 @@ val a = println("hello world")
 val a = 5
 val x = if (a == 5) "true" else "false"
 ```
+
+# Closure 
+
+Associating the state of a variable along with the functionality is called as closure.
+
+**example:**
+
+```scala
+//Creating a function to calc Area of the circle and defining the Pi value
+def areaOfCircle = {
+  val pi = 3.14
+  (r:Int) => pi * r * r
+}
+
+// Now Change the Pi value explicitly outside the function
+val pi = 4.5
+
+//Now calling the function to see if the pi value is updated
+
+areaOfCircle(10)
+```
+**Result is 314 and only the Pi value defined in the function is used by the func. This concept is called as Closure.**
+
+# Scala Type Heirarchy
+
+Any is on top
+
+Then we have AnyVal and AnyRef
+
+AnyVal consists of:
+- Byte
+- Char
+- Short
+- Int
+- Float
+- Long
+- Double
+
+- Unit
+- Boolean
+
+
+AnyRef consists of:
+- List (all the collection datatypes)
+- Sequence
+- Tuple
+- String (all the classes)
+  
+Null & Nothing
+Null is valid for only for AnyRef types
+Nothing - there is no return type.
+
+# Operators
+
+There are no operators in Scala. There are only methods in Scala.
+
+Example:
+
+```s
+val a = 10
+val b = 20
+
+val mul = a * b
+```
+
+When you call `a * b`, this will internally call the methods on Int and `a.*b` is evaluated.
+
+# Anonymous Functions
+
+A function without a name
+
+```scala
+val a = 1 to 100
+
+a.map((x:Int) => {x * 2})
+```
+
+Using Placeholder Syntax
+
+a.map(_ * 2)
